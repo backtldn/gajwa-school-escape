@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5e5c7">
+  <title>학교 탈출 | SCHOOL ESCAPE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell" aria-label="학교 탈출 게임">
+    <canvas id="game-canvas" tabindex="0" aria-label="WASD 또는 방향키로 이동하는 학교 지도"></canvas>
+    <header class="game-hud">
+      <a class="brand" href="#" aria-label="학교 탈출">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span class="brand-english">SCHOOL <strong>ESCAPE</strong></span>
+        <span class="game-title">학교 탈출</span>
+      </a>
+      <div class="hud-progress" aria-live="polite"><span>찾은 책</span><strong><span id="progress-count">0</span><i> / 15</i></strong></div>
+      <div class="hud-timer" aria-live="off"><span aria-hidden="true">◷</span><time id="elapsed-time">0분 00초</time></div>
+    </header>
+    <div id="interaction-prompt" class="interaction-prompt hidden"><kbd>E</kbd> <span>책 읽기</span></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <div class="movement-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 또는 방향키로 이동</div>
+  </main>
+
+  <div id="start-screen" class="overlay">
+    <section class="dialog start-dialog" role="dialog" aria-modal="true" aria-labelledby="start-title">
+      <div class="dialog-emblem" aria-hidden="true">✦</div>
+      <p class="eyebrow">SCHOOL ESCAPE</p>
+      <h2 id="start-title">책 속 단서를 찾아<br><span>학교를 탈출하세요!</span></h2>
+      <p class="dialog-copy">밝은 학교 곳곳에 놓인 책 15권을 찾아 읽어 보세요. 모든 문제를 풀고 정문으로 향하면 탈출할 수 있어요.</p>
+      <div class="start-instructions"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 이동</span><span><kbd>E</kbd> 조사하기</span></div>
+      <button id="start-button" class="primary-button">학교에 들어가기 <span aria-hidden="true">→</span></button>
+      <p class="small-note">책 가까이에서 E 키를 눌러 읽기</p>
+    </section>
+  </div>
+
+  <div id="question-screen" class="overlay hidden">
+    <section class="dialog question-dialog" role="dialog" aria-modal="true" aria-labelledby="question-title">
+      <button id="close-question" class="close-button" aria-label="닫기">×</button>
+      <p class="eyebrow" id="question-room">조사 중</p>
+      <div class="question-number">CLUE <span id="question-number">01</span> <span class="number-line"></span></div>
+      <h2 id="question-title"></h2>
+      <p id="question-hint" class="question-hint"></p>
+      <form id="answer-form">
+        <label for="answer-input">정답을 입력해 주세요</label>
+        <div class="answer-row">
+          <input id="answer-input" name="answer" type="text" autocomplete="off" placeholder="여기에 답을 입력하세요" required>
+          <button class="primary-button answer-button" type="submit">확인</button>
+        </div>
+      </form>
+      <p id="answer-feedback" class="answer-feedback" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <div id="ending-screen" class="overlay hidden">
+    <section class="dialog ending-dialog" role="dialog" aria-modal="true" aria-labelledby="ending-title">
+      <div class="dialog-emblem ending-emblem" aria-hidden="true">✦</div>
+      <p class="eyebrow">MISSION COMPLETE</p>
+      <h2 id="ending-title">탈출 성공!</h2>
+      <p class="dialog-copy">학교의 모든 책을 읽고 멋지게 탈출했어요.<br>정말 잘했어요!</p>
+      <div class="ending-stats"><strong id="final-time">0분 00초</strong><small>최종 플레이 시간</small><strong class="solved-count">15 <span>/ 15</span></strong><small>해결한 문제 수</small></div>
+      <button id="restart-button" class="primary-button">다시 도전하기 <span aria-hidden="true">↻</span></button>
+    </section>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
